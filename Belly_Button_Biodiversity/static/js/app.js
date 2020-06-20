@@ -4,7 +4,7 @@ function barGraph(sampleSelected) {
     var topOTUs = sampleSelected.otu_ids.slice(0, 10);
     var topOTUs = topOTUs.map(i => "OTU " + i);
     // Create variable containing top 10 datapoints
-    var data = [{
+    var dataPoints = [{
         x: sampleSelected.sample_values.slice(0, 10),
         y: topOTUs,
         labels: sampleSelected.otu_labels.slice(0, 10),
@@ -13,20 +13,20 @@ function barGraph(sampleSelected) {
         orientation: "h",
     }];
     // Create variable containing graph layout
-    var layout = {
+    var graphLayout = {
         title: "Test Subject Top 10 OTUs",
         yaxis: {autorange:"reversed",
             tickmode:"linear",
         },
     };
     // Plot bar graph
-    Plotly.newPlot("bar", data, layout);
+    Plotly.newPlot("bar", dataPoints, graphLayout);
 };
   
 // Create bubble graph function
 function bubbleGraph(sampleSelected) {
 // Create variable containing data for sample selected
-    var data = [{
+    var dataPoints = [{
         x: sampleSelected.otu_ids,
         y: sampleSelected.sample_values,
         mode: "markers",
@@ -37,13 +37,13 @@ function bubbleGraph(sampleSelected) {
         labels: sampleSelected.otu_labels
     }];
     // Create variable containing graph layout
-    var layout = {
+    var graphLayout = {
         xaxis:{title: "OTU ID"},
         height: 600,
         width: 1200
     };
     // Plot bubble graph
-    Plotly.newPlot("bubble", data, layout); 
+    Plotly.newPlot("bubble", dataPoints, graphLayout); 
 };
   
   
