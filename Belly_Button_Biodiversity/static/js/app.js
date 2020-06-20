@@ -7,7 +7,7 @@ function barGraph(sampleSelected) {
     var dataPoints = [{
         x: sampleSelected.sample_values.slice(0, 10),
         y: topOTUs,
-        labels: sampleSelected.otu_labels.slice(0, 10),
+        text: sampleSelected.otu_labels.slice(0, 10),
         marker: {color: '#0A3048'},
         type:"bar",
         orientation: "h",
@@ -34,7 +34,7 @@ function bubbleGraph(sampleSelected) {
         size: sampleSelected.sample_values,
         color: sampleSelected.otu_ids
         },
-        labels: sampleSelected.otu_labels
+        text: sampleSelected.otu_labels
     }];
     // Create variable containing graph layout
     var graphLayout = {
@@ -64,22 +64,22 @@ function initialize() {
     // Create variable for dropdown menu
     var dropdown = d3.select("#selDataset"); 
     // Append test subject IDs to dropdown list
-    d3.json("static/samples.json").then((data) => {       
-        data.names.forEach((name) => {
+    d3.json("static/samples.json").then((dataPoints) => {       
+        dataPoints.names.forEach((name) => {
         dropdown.append("option").text(name).property("value");
         });
     // Populate the graphs and table with first test subject data
-    testSubjectChange(data.names[0]);
+    testSubjectChange(dataPoints.names[0]);
     });
 };
 
 // Create function to populate graphs and table when test subject is changed from dropdown
 function testSubjectChange(sample) {
     // Pull all test subject data
-    d3.json("static/samples.json").then((data) => {
+    d3.json("static/samples.json").then((dataPoints) => {
         // Filter based on dropdown option selected
-        var testSubject = data.metadata.filter(meta => meta.id.toString() === sample)[0];
-        var sampleSelected = data.samples.filter(s => s.id.toString() === sample)[0];
+        var testSubject = dataPoints.metadata.filter(meta => meta.id.toString() === sample)[0];
+        var sampleSelected = dataPoints.samples.filter(s => s.id.toString() === sample)[0];
         // Run graph and table functions with updated test subject information
         barGraph(sampleSelected);
         bubbleGraph(sampleSelected);
