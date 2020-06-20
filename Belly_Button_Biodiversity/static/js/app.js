@@ -7,7 +7,7 @@ function barGraph(sampleSelected) {
     var data = [{
         x: sampleSelected.sample_values.slice(0, 10),
         y: topOTUs,
-        text: sampleSelected.otu_labels.slice(0, 10),
+        labels: sampleSelected.otu_labels.slice(0, 10),
         marker: {color: '#0A3048'},
         type:"bar",
         orientation: "h",
@@ -34,7 +34,7 @@ function bubbleGraph(sampleSelected) {
         size: sampleSelected.sample_values,
         color: sampleSelected.otu_ids
         },
-        text: sampleSelected.otu_labels
+        labels: sampleSelected.otu_labels
     }];
     // Create variable containing graph layout
     var layout = {
@@ -60,7 +60,7 @@ function demInfoTable(testSubject) {
 };
 
 // Create function to populate graphs and table with first test subject data points
-function init() {
+function initialize() {
     // Create variable for dropdown menu
     var dropdown = d3.select("#selDataset"); 
     // Append test subject IDs to dropdown list
@@ -87,5 +87,5 @@ function testSubjectChange(sample) {
     });
 };
 
-// Run the initialize funciton
-init();
+// Start application using initialize function
+initialize();
